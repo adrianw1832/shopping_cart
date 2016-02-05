@@ -46,10 +46,17 @@ describe('Cart', function() {
       expect(cart.total).toEqual(0);
     });
 
-    it('can total up the price of the items', function() {
+    it('can total up the price of the items having added some', function() {
       cart.addItem('Suede Shoes, Blue', 1);
       cart.addItem('Flip Flops, Red', 2);
       expect(cart.total).toEqual(80);
+    });
+
+    it('can total up the price of the items having removed some', function() {
+      cart.addItem('Suede Shoes, Blue', 1);
+      cart.addItem('Flip Flops, Red', 2);
+      cart.removeItem('Flip Flops, Red', 1);
+      expect(cart.total).toEqual(61);
     });
   });
 });
