@@ -18,6 +18,7 @@ Cart.prototype.removeItem = function(item, amount) {
   if (this.contents[item] < amount) throw new Error('Not possible');
   this.contents[item] -= amount;
   this._calculateTotal();
+  this._adjustStockLevel(item, -amount);
 };
 
 Cart.prototype._calculateTotal = function() {

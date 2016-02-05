@@ -127,5 +127,11 @@ describe('Cart', function() {
       cart.addItem('Suede Shoes, Blue', 1);
       expect(cart.showStock('Suede Shoes, Blue')).toEqual('3');
     });
+
+    it('increases stock correctly from data when an item is removed from the cart', function() {
+      cart.addItem('Suede Shoes, Blue', 3);
+      cart.removeItem('Suede Shoes, Blue', 1);
+      expect(cart.showStock('Suede Shoes, Blue')).toEqual('2');
+    });
   });
 });
