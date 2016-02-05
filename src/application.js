@@ -1,3 +1,5 @@
 $(document).ready(function() {
-  var shoppingCart = new ShoppingCart();
+  var cart = new Cart();
+
+  $('#total').html(cart.total);
 });
