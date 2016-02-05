@@ -41,5 +41,15 @@ describe('Cart', function() {
       cart.addItem('Suede Shoes, Blue', 1);
       expect(function(){ cart.removeItem('Suede Shoes, Blue', 2); }).toThrow(new Error('Not possible'));
     });
+
+    it('starts with a total of 0', function() {
+      expect(cart.total).toEqual(0);
+    });
+
+    it('can total up the price of the items', function() {
+      cart.addItem('Suede Shoes, Blue', 1);
+      cart.addItem('Flip Flops, Red', 2);
+      expect(cart.total).toEqual(80);
+    });
   });
 });
