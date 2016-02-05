@@ -4,6 +4,7 @@ function Cart() {
   var items = new ItemList();
   items.loadData();
   this.catalogue = items;
+  this.voucherCodes = ['voucher1', 'voucher2', 'voucher3'];
 }
 
 Cart.prototype.addItem = function(item, amount) {
@@ -36,7 +37,17 @@ Cart.prototype.resetTotal = function() {
 };
 
 Cart.prototype.applyVoucher = function(code) {
+  this._checkForEmptyCart();
+  this._checkVoucherCodes(code);
   this._applyVoucherCodes(code);
+};
+
+Cart.prototype._checkForEmptyCart = function() {
+  if (Object.keys(this.contents).length === 0) throw new Error('Please select items first');
+};
+
+Cart.prototype._checkVoucherCodes = function(code) {
+  if (this.voucherCodes.indexOf(code) < 0) throw new Error('Wrong coupon code');
 };
 
 Cart.prototype._applyVoucherCodes = function(code) {
@@ -46,4 +57,6 @@ Cart.prototype._applyVoucherCodes = function(code) {
 Cart.prototype._applyVoucherOne = function() {
   this.total -= 5;
 };
+
+
 
