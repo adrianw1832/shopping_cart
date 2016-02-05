@@ -66,4 +66,12 @@ describe('Cart', function() {
       expect(cart.total).toEqual(0);
     });
   });
+
+  describe('voucher system', function() {
+    it('can apply the £5 off your order discount', function() {
+      cart.addItem('Suede Shoes, Blue', 1);
+      cart.applyVoucher('voucher1');
+      expect(cart.total).toEqual(37);
+    });
+  });
 });

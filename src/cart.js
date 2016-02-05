@@ -35,3 +35,15 @@ Cart.prototype.resetTotal = function() {
   this.calculateTotal();
 };
 
+Cart.prototype.applyVoucher = function(code) {
+  this._applyVoucherCodes(code);
+};
+
+Cart.prototype._applyVoucherCodes = function(code) {
+  if (code === 'voucher1') this._applyVoucherOne();
+};
+
+Cart.prototype._applyVoucherOne = function() {
+  this.total -= 5;
+};
+
