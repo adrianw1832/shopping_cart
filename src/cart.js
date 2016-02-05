@@ -53,6 +53,7 @@ Cart.prototype._checkVoucherCodes = function(code) {
 Cart.prototype._applyVoucherCodes = function(code) {
   if (code === 'voucher1') this._applyVoucherOne();
   if (code === 'voucher2') this._applyVoucherTwo();
+  if (code === 'voucher3') this._applyVoucherThree();
 };
 
 Cart.prototype._applyVoucherOne = function() {
@@ -66,3 +67,10 @@ Cart.prototype._applyVoucherTwo = function() {
     throw new Error('Cannot use this discount');
   }
 };
+
+Cart.prototype._applyVoucherThree = function() {
+  if (this.total >= 75) {
+    this.total -= 15;
+  }
+};
+

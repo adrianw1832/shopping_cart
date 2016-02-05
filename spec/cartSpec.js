@@ -94,5 +94,17 @@ describe('Cart', function() {
       cart.addItem('Suede Shoes, Blue', 1);
       expect(function(){ cart.applyVoucher('voucher2'); }).toThrow(new Error('Cannot use this discount'));
     });
+
+    it('can apply the £15 off when you have bought at least one footwear item (female) and spent over £75', function() {
+      cart.addItem('Almond Toe Court Shoes, Patent Black', 1);
+      cart.applyVoucher('voucher3');
+      expect(cart.total).toEqual(84);
+    });
+
+    it('can apply the £15 off when you have bought at least one footwear item (male) and spent over £75', function() {
+      cart.addItem('Flip Flops, Red', 5);
+      cart.applyVoucher('voucher3');
+      expect(cart.total).toEqual(80);
+    });
   });
 });
