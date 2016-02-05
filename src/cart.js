@@ -9,17 +9,18 @@ function Cart() {
 
 Cart.prototype.addItem = function(item, amount) {
   typeof this.contents[item] === 'undefined' ? this.contents[item] = amount : this.contents[item] += amount;
-  this.calculateTotal();
+  this._calculateTotal();
+  this._adjustStockLevel(item, amount);
 };
 
 Cart.prototype.removeItem = function(item, amount) {
   if (typeof this.contents[item] === 'undefined') throw new Error('Not possible');
   if (this.contents[item] < amount) throw new Error('Not possible');
   this.contents[item] -= amount;
-  this.calculateTotal();
+  this._calculateTotal();
 };
 
-Cart.prototype.calculateTotal = function() {
+Cart.prototype._calculateTotal = function() {
   var priceArray = [], amountArray = [], sum = 0;
   for (var key in this.contents) {
     priceArray.push(this.catalogue.items[key].price.substring(1) * 1);
@@ -33,7 +34,7 @@ Cart.prototype.calculateTotal = function() {
 
 Cart.prototype.resetTotal = function() {
   this.contents = {};
-  this.calculateTotal();
+  this._calculateTotal();
 };
 
 Cart.prototype.applyVoucher = function(code) {
@@ -92,4 +93,9 @@ function checkAny(array, value) {
 
 Cart.prototype.showStock = function(item) {
   return this.catalogue.items[item].stock;
+};
+
+Cart.prototype._adjustStockLevel = function(item, amount) {
+  var newAmount = String(this.catalogue.items[item].stock - amount);
+  this.catalogue.items[item].stock = newAmount;
 };

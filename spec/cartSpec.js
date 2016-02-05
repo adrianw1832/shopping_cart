@@ -122,5 +122,10 @@ describe('Cart', function() {
     it('displays the current stock level', function() {
       expect(cart.showStock('Suede Shoes, Blue')).toEqual('4');
     });
+
+    it('reduces stock correctly from data when an item is added to the cart', function() {
+      cart.addItem('Suede Shoes, Blue', 1);
+      expect(cart.showStock('Suede Shoes, Blue')).toEqual('3');
+    });
   });
 });
