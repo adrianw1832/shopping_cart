@@ -106,5 +106,21 @@ describe('Cart', function() {
       cart.applyVoucher('voucher3');
       expect(cart.total).toEqual(80);
     });
+
+    it('cannot apply the £15 off discount when there are no footwear items', function() {
+      cart.addItem('Gold Button Cardigan, Black', 1);
+      expect(function(){ cart.applyVoucher('voucher3'); }).toThrow(new Error('Cannot use this discount'));
+    });
+
+    it('cannot apply the £15 off discount when the total is less than £75', function() {
+      cart.addItem('Suede Shoes, Blue', 1);
+      expect(function(){ cart.applyVoucher('voucher3'); }).toThrow(new Error('Cannot use this discount'));
+    });
+  });
+
+  describe('stock tracker', function() {
+    it('displays the current stock level', function() {
+      expect(cart.showStock('Suede Shoes, Blue')).toEqual('4');
+    });
   });
 });

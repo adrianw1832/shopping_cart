@@ -69,8 +69,27 @@ Cart.prototype._applyVoucherTwo = function() {
 };
 
 Cart.prototype._applyVoucherThree = function() {
-  if (this.total >= 75) {
+  if (this.total >= 75 && this._checkForFootwear()) {
     this.total -= 15;
+  } else {
+    throw new Error('Cannot use this discount');
   }
 };
 
+Cart.prototype._checkForFootwear = function() {
+  var categoryArray = [];
+  for (var key in this.contents) {
+    categoryArray.push(this.catalogue.items[key].category);
+  }
+  return checkAny(categoryArray, "Women's Footwear") || checkAny(categoryArray, "Men's Footwear");
+};
+
+function checkAny(array, value) {
+  return array.some(function(arrayValue) {
+    return value === arrayValue;
+  });
+}
+
+Cart.prototype.showStock = function(item) {
+  return this.catalogue.items[item].stock;
+};
