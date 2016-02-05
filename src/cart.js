@@ -30,3 +30,8 @@ Cart.prototype.calculateTotal = function() {
   this.total = sum;
 };
 
+Cart.prototype.resetTotal = function() {
+  this.contents = {};
+  this.calculateTotal();
+};
+

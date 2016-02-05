@@ -58,5 +58,12 @@ describe('Cart', function() {
       cart.removeItem('Flip Flops, Red', 1);
       expect(cart.total).toEqual(61);
     });
+
+    it('the total can be resetted', function() {
+      cart.addItem('Suede Shoes, Blue', 1);
+      cart.resetTotal();
+      expect(cart.contents).toEqual({});
+      expect(cart.total).toEqual(0);
+    });
   });
 });
