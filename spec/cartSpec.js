@@ -73,5 +73,14 @@ describe('Cart', function() {
       cart.applyVoucher('voucher1');
       expect(cart.total).toEqual(37);
     });
+
+    it('does not allow vouchers to be applied to an empty cart', function() {
+      expect(function(){ cart.applyVoucher('voucher1'); }).toThrow(new Error('Please select items first'));
+    });
+
+    it('requires the correct code to be entered', function() {
+      cart.addItem('Suede Shoes, Blue', 1);
+      expect(function(){ cart.applyVoucher('wrongcode'); }).toThrow(new Error('Wrong coupon code'));
+    });
   });
 });
