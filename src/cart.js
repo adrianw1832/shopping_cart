@@ -52,11 +52,17 @@ Cart.prototype._checkVoucherCodes = function(code) {
 
 Cart.prototype._applyVoucherCodes = function(code) {
   if (code === 'voucher1') this._applyVoucherOne();
+  if (code === 'voucher2') this._applyVoucherTwo();
 };
 
 Cart.prototype._applyVoucherOne = function() {
   this.total -= 5;
 };
 
-
-
+Cart.prototype._applyVoucherTwo = function() {
+  if (this.total >= 50) {
+    this.total -= 10;
+  } else {
+    throw new Error('Cannot use this discount');
+  }
+};

@@ -82,5 +82,17 @@ describe('Cart', function() {
       cart.addItem('Suede Shoes, Blue', 1);
       expect(function(){ cart.applyVoucher('wrongcode'); }).toThrow(new Error('Wrong coupon code'));
     });
+
+    it('can apply the £10 off when you spend over £50 discount', function() {
+      cart.addItem('Suede Shoes, Blue', 1);
+      cart.addItem('Flip Flops, Red', 2);
+      cart.applyVoucher('voucher2');
+      expect(cart.total).toEqual(70);
+    });
+
+    it('cannot apply the £10 off discount when the total is less than £50', function() {
+      cart.addItem('Suede Shoes, Blue', 1);
+      expect(function(){ cart.applyVoucher('voucher2'); }).toThrow(new Error('Cannot use this discount'));
+    });
   });
 });
