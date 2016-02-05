@@ -133,5 +133,10 @@ describe('Cart', function() {
       cart.removeItem('Suede Shoes, Blue', 1);
       expect(cart.showStock('Suede Shoes, Blue')).toEqual('2');
     });
+
+    it('does not allow stock to drop below 0', function() {
+      cart.addItem('Suede Shoes, Blue', 4);
+      expect(function(){ cart.addItem('Suede Shoes, Blue', 1); }).toThrow(new Error('Out of Stock'));
+    });
   });
 });

@@ -97,6 +97,7 @@ Cart.prototype.showStock = function(item) {
 };
 
 Cart.prototype._adjustStockLevel = function(item, amount) {
-  var newAmount = String(this.catalogue.items[item].stock - amount);
-  this.catalogue.items[item].stock = newAmount;
+  var newAmount = this.catalogue.items[item].stock - amount;
+  if (newAmount < 0) throw new Error('Out of Stock');
+  this.catalogue.items[item].stock = String(newAmount);
 };
