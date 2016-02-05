@@ -26,5 +26,11 @@ describe('Cart', function() {
       cart.addItem('Flip Flops, Red', 2);
       expect(cart.contents).toEqual({'Suede Shoes, Blue': 1, 'Flip Flops, Red': 2});
     });
+
+    it('user can remove an item from it', function() {
+      cart.addItem('Suede Shoes, Blue', 2);
+      cart.removeItem('Suede Shoes, Blue', 1);
+      expect(cart.contents).toEqual({'Suede Shoes, Blue': 1});
+    });
   });
 });
