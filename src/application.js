@@ -3,6 +3,13 @@ $(document).ready(function() {
   var nameArray = Object.keys(cart.catalogue.items);
 
   var update = function() {
+  var itemArray = [], amountArray = [];
+  for (var key in cart.contents) {
+    itemArray.push(key);
+    amountArray.push(cart.contents[key]);
+  }
+    $('#contents').text(itemArray);
+    $('#amounts').text(amountArray);
     $('#total').html(cart.total);
     for (var i = 0; i < nameArray.length; i++) {
       var name = nameArray[i];
