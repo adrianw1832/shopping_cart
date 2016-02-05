@@ -32,5 +32,14 @@ describe('Cart', function() {
       cart.removeItem('Suede Shoes, Blue', 1);
       expect(cart.contents).toEqual({'Suede Shoes, Blue': 1});
     });
+
+    it('does not allow user to remove from an empty cart', function() {
+      expect(function(){ cart.removeItem('Suede Shoes, Blue', 1); }).toThrow(new Error('Not possible'));
+    });
+
+    it('does not allow user to remove more than possible', function() {
+      cart.addItem('Suede Shoes, Blue', 1);
+      expect(function(){ cart.removeItem('Suede Shoes, Blue', 2); }).toThrow(new Error('Not possible'));
+    });
   });
 });
